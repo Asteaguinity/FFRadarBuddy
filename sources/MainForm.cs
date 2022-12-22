@@ -264,7 +264,6 @@ namespace FFRadarBuddy
 
         private void checkBoxPauseScan_CheckedChanged(object sender, EventArgs e)
         {
-            checkBoxPauseScan.Checked = !checkBoxPauseScan.Checked;
             if (!checkBoxPauseScan.Checked)
             {
                 GameData_OnActorListChanged();
