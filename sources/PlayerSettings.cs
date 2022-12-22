@@ -14,6 +14,7 @@ namespace FFRadarBuddy
         public float MaxDistanceFromCenter;
         public float MaxDistanceFromCamera;
         public bool FilterNearbyActors;
+        public bool ShowDistanceInOverlay;
 
         public List<ActorFilterPreset> Presets;
 
@@ -26,6 +27,7 @@ namespace FFRadarBuddy
             MaxDistanceFromCenter = 0.5f;
             MaxDistanceFromCamera = 100.0f;
             FilterNearbyActors = false;
+            ShowDistanceInOverlay = false;
             Presets = new List<ActorFilterPreset>();
             DBPath = "FFRadarBuddy-settings.json";
         }
@@ -102,6 +104,7 @@ namespace FFRadarBuddy
                 MaxDistanceFromCamera = (JsonParser.FloatValue)jsonOb["maxCameraDist"];
 
                 FilterNearbyActors = jsonOb.entries.ContainsKey("filterNearby") ? (JsonParser.BoolValue)jsonOb["filterNearby"] : false;
+                ShowDistanceInOverlay = jsonOb.entries.ContainsKey("showDistanceInOverlay") ? (JsonParser.BoolValue)jsonOb["showDistanceInOverlay"] : false;
 
                 JsonParser.ArrayValue arrPresets = (JsonParser.ArrayValue)jsonOb["presets"];
                 foreach (JsonParser.Value v in arrPresets.entries)
@@ -133,6 +136,7 @@ namespace FFRadarBuddy
             writer.WriteFloat(MaxDistanceFromCenter, "maxCenterDist");
             writer.WriteFloat(MaxDistanceFromCamera, "maxCameraDist");
             writer.WriteBool(FilterNearbyActors, "filterNearby");
+            writer.WriteBool(ShowDistanceInOverlay, "showDistanceInOverlay");
 
             writer.WriteArrayStart("presets");
             foreach (ActorFilterPreset preset in Presets)

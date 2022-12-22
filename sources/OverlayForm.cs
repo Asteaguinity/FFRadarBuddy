@@ -30,6 +30,7 @@ namespace FFRadarBuddy
 
         private float maxProjectedDistFromCenterSq = 0.25f;
         private float maxDistanceFromCamera = 100.0f;
+        private bool showDistanceInOverlay;
 
         public OverlayForm()
         {
@@ -41,6 +42,7 @@ namespace FFRadarBuddy
             PlayerSettings settings = PlayerSettings.Get();
             maxProjectedDistFromCenterSq = settings.MaxDistanceFromCenter * settings.MaxDistanceFromCenter;
             maxDistanceFromCamera = settings.MaxDistanceFromCamera;
+            showDistanceInOverlay = settings.ShowDistanceInOverlay;
 
             labelFont = new Font(FontFamily.GenericSansSerif, settings.FontSize);
             labelFontLarge = new Font(FontFamily.GenericSansSerif, settings.FontSize + 2.0f, FontStyle.Bold);
@@ -151,19 +153,21 @@ namespace FFRadarBuddy
 
         private void DrawActorLabelSimple(GameData.ActorItem actor, Vector2 canvasPt, Graphics graphics, float markerRadius, Font useFont)
         {
-            SizeF drawTextSize = graphics.MeasureString(actor.OverlaySettings.Description, useFont);
+            String drawText = actor.OverlaySettings.Description + (showDistanceInOverlay ? " (" + actor.ShowDistance + ")" : "");
+            SizeF drawTextSize = graphics.MeasureString(drawText, useFont);
             float textPosX = canvasPt.X - (drawTextSize.Width * 0.5f);
             float textPosY = canvasPt.Y + markerRadius + 2;
 
             graphics.FillRectangle(labelBackgroundBrush, textPosX - 2, textPosY, drawTextSize.Width + 4, drawTextSize.Height);
-            graphics.DrawString(actor.OverlaySettings.Description, useFont, labelForegroundBrush, textPosX, textPosY);
+            graphics.DrawString(drawText, useFont, labelForegroundBrush, textPosX, textPosY);
         }
 
         private void DrawActorLabelFancy(GameData.ActorItem actor, Vector2 canvasPt, Graphics graphics, float markerRadius, Font useFont)
         {
             const float markerOffset = 5;
 
-            SizeF drawTextSize = graphics.MeasureString(actor.OverlaySettings.Description, useFont);
+            String drawText = actor.OverlaySettings.Description + (showDistanceInOverlay ? " (" + actor.ShowDistance + ")" : "");
+            SizeF drawTextSize = graphics.MeasureString(drawText, useFont);
             float textPosX = canvasPt.X + (markerOffset * 2);
             float anchorX0 = canvasPt.X + markerRadius - 1;
             float anchorX1 = textPosX - 2;
@@ -189,7 +193,7 @@ namespace FFRadarBuddy
             }
 
             graphics.FillRectangle(labelBackgroundBrush, textPosX - 2, textPosY, drawTextSize.Width + 4, drawTextSize.Height);
-            graphics.DrawString(actor.OverlaySettings.Description, useFont, labelForegroundBrush, textPosX, textPosY);
+            graphics.DrawString(drawText, useFont, labelForegroundBrush, textPosX, textPosY);
             graphics.DrawLine(actor.OverlaySettings.DrawPen, anchorX0, anchorY0, anchorX1, anchorY);
             graphics.DrawLine(actor.OverlaySettings.DrawPen, anchorX1, anchorY, anchorX2, anchorY);
         }
