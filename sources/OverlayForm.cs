@@ -104,7 +104,7 @@ namespace FFRadarBuddy
             }
             if (gameData.UpdateConditionFlags())
             {
-                if (hideDuringCutscenes && gameData.conditionFlags.OccupiedInCutSceneEvent)
+                if (hideDuringCutscenes && gameData.conditionFlags.IsWatchingCutscene())
                 {
                     this.Hide();
                 }

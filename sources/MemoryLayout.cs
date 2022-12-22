@@ -50,6 +50,8 @@ namespace FFRadarBuddy
         {
             public static int Size = 95; // at least
             public static int OccupiedInCutSceneEvent = 35;
+            public static int WatchingCutscene = 58;
+            public static int WatchingCutscene78 = 78;
         }
 
         public enum ActorType : byte
@@ -204,7 +206,9 @@ namespace FFRadarBuddy
         public class ConditionFlagData
         {
             public byte[] ConditionFlags;
-            public bool OccupiedInCutSceneEvent;
+            private bool OccupiedInCutSceneEvent;
+            private bool WatchingCutscene;
+            private bool WatchingCutscene78;
 
             public ConditionFlagData() { }
             public ConditionFlagData(byte[] bytes) { Set(bytes); }
@@ -215,12 +219,14 @@ namespace FFRadarBuddy
                 {
                     ConditionFlags = bytes;
                     OccupiedInCutSceneEvent = BitConverter.ToBoolean(bytes, ConditionFlagConsts.OccupiedInCutSceneEvent);
+                    WatchingCutscene = BitConverter.ToBoolean(bytes, ConditionFlagConsts.WatchingCutscene);
+                    WatchingCutscene78 = BitConverter.ToBoolean(bytes, ConditionFlagConsts.WatchingCutscene78);
                     return true;
                 }
                 return false;
             }
 
-            static bool ByteArrayCompare(byte[] a1, byte[] a2)
+            private static bool ByteArrayCompare(byte[] a1, byte[] a2)
             {
                 if ((a1 == null) != (a2 == null))
                     return false;
@@ -233,6 +239,11 @@ namespace FFRadarBuddy
                         return false;
 
                 return true;
+            }
+
+            public bool IsWatchingCutscene()
+            {
+                return OccupiedInCutSceneEvent || WatchingCutscene || WatchingCutscene78;
             }
         }
     }
