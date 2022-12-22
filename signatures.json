@@ -74,7 +74,7 @@
         }, {
             "id": "conditions",
             "type": "fixed",
-            "fixed": "0x1ec10b0",
+            "fixed": "0x1ebd030",
             "offsets": [],
             "fields": [{
                     "id": "size",
