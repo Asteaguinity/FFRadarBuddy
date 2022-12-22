@@ -11,7 +11,8 @@ namespace FFRadarBuddy
 {
     public class GithubUpdaterPresets
     {
-        const string repoLink = "https://github.com/MgAl2O4/FFRadarBuddy/";
+        const string repoLink = "https://github.com/Asteaguinity/FFRadarBuddy/";
+        const string branchName = "master";
 
         public static List<string> FindAndDownloadPresets(out string statusMsg)
         {
@@ -42,7 +43,7 @@ namespace FFRadarBuddy
         {
             List<string> fileNames = new List<string>();
 
-            WebRequest ReqTree = WebRequest.Create(repoLink + "tree/master/presets");
+            WebRequest ReqTree = WebRequest.Create(repoLink + "tree/" + branchName + "/presets");
             ReqTree.Timeout = -1;
 
             WebResponse RespTree = ReqTree.GetResponse();
@@ -82,7 +83,7 @@ namespace FFRadarBuddy
 
         private static string DownloadPresetFile(string fileName)
         {
-            string filePath = repoLink.Replace("github.com", "raw.githubusercontent.com") + "master/presets/" + fileName;
+            string filePath = repoLink.Replace("github.com", "raw.githubusercontent.com") + branchName + "/presets/" + fileName;
             string fileContent = null;
 
             WebRequest ReqTree = WebRequest.Create(filePath);

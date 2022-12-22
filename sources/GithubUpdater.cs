@@ -12,7 +12,7 @@ namespace FFRadarBuddy
     public class GithubUpdater
     {
         const string UpdateFileNamePart = "temp-update-v";
-        const string repoLink = "https://github.com/MgAl2O4/FFRadarBuddy/";
+        const string repoLink = "https://github.com/Asteaguinity/FFRadarBuddy/";
 
         public static bool FindAndApplyUpdates()
         {

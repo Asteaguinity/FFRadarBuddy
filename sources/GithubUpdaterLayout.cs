@@ -8,7 +8,8 @@ namespace FFRadarBuddy
 {
     public class GithubUpdaterLayout
     {
-        const string repoLink = "https://github.com/MgAl2O4/FFRadarBuddy/";
+        const string repoLink = "https://github.com/Asteaguinity/FFRadarBuddy/";
+        const string branchName = "master";
 
         public static bool DownloadAndUpdateLayout(out string statusMsg)
         {
@@ -57,7 +58,7 @@ namespace FFRadarBuddy
 
         private static string DownloadLayoutFile(string fileName)
         {
-            string filePath = repoLink.Replace("github.com", "raw.githubusercontent.com") + "master/" + fileName;
+            string filePath = repoLink.Replace("github.com", "raw.githubusercontent.com") + branchName + "/" + fileName;
             string fileContent = null;
 
             WebRequest ReqTree = WebRequest.Create(filePath);
