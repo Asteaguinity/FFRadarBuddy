@@ -71,6 +71,25 @@
                     "v": 288
                 }
             ]
+        }, {
+            "id": "conditions",
+            "type": "fixed",
+            "fixed": "0x1ec10b0",
+            "offsets": [],
+            "fields": [{
+                    "id": "size",
+                    "v": 95
+                }, {
+                    "id": "OccupiedInCutSceneEvent",
+                    "v": 35
+                }, {
+                    "id": "WatchingCutscene",
+                    "v": 58
+                }, {
+                    "id": "WatchingCutscene78",
+                    "v": 78
+                }
+            ]
         }
     ]
 }

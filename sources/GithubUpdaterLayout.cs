@@ -40,6 +40,11 @@ namespace FFRadarBuddy
                         MemoryLayout.memPathCamera = CreateMemoryPath(entryOb);
                         UpdateMemoryLayout((JsonParser.ArrayValue)entryOb["fields"], typeof(MemoryLayout.CameraConsts));
                     }
+                    else if (typeStr == "conditions")
+                    {
+                        MemoryLayout.memPathConditionFlag = CreateMemoryPath(entryOb);
+                        UpdateMemoryLayout((JsonParser.ArrayValue)entryOb["fields"], typeof(MemoryLayout.ConditionFlagConsts));
+                    }
                     else
                     {
                         throw new Exception("Unexpected type: " + typeStr + " in entry " + idx);
