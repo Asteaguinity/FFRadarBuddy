@@ -52,7 +52,7 @@
         }, {
             "id": "camera",
             "type": "fixed",
-            "fixed": "1e7b880",
+            "fixed": "1e72880",
             "offsets": [0],
             "fields": [{
                     "id": "size",
