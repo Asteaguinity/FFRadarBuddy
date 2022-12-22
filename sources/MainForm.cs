@@ -757,6 +757,7 @@ namespace FFRadarBuddy
                 case GameData.OverlaySettings.DisplayMode.WhenClose: lvi.SubItems[4].Text = "Close"; break;
                 case GameData.OverlaySettings.DisplayMode.WhenLookingAt: lvi.SubItems[4].Text = "Look at"; break;
                 case GameData.OverlaySettings.DisplayMode.WhenCloseAndLookingAt: lvi.SubItems[4].Text = "Close & Look at"; break;
+                case GameData.OverlaySettings.DisplayMode.AlwaysAndHighlight: lvi.SubItems[4].Text = "Always & Highlight"; break;
                 default: lvi.SubItems[4].Text = filterOb.Mode.ToString(); break;
             }
         }

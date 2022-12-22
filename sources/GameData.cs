@@ -24,6 +24,7 @@ namespace FFRadarBuddy
                 WhenClose,
                 WhenCloseAndLookingAt,
                 Always,
+                AlwaysAndHighlight,
             }
 
             public bool IsHighlighted = false;

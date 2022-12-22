@@ -108,7 +108,7 @@ namespace FFRadarBuddy
             bool canShow = false;
             if (projectedPt.Z > 0)
             {
-                if (actor.OverlaySettings.Mode == GameData.OverlaySettings.DisplayMode.Always || actor.OverlaySettings.IsHighlighted)
+                if (actor.OverlaySettings.Mode == GameData.OverlaySettings.DisplayMode.Always || actor.OverlaySettings.Mode == GameData.OverlaySettings.DisplayMode.AlwaysAndHighlight || actor.OverlaySettings.IsHighlighted)
                 {
                     canShow = true;
                 }
@@ -211,7 +211,7 @@ namespace FFRadarBuddy
                     canvasPt.Y = Math.Min(Height, Math.Max(0, canvasPt.Y));
 
                     graphics.DrawEllipse(actor.OverlaySettings.DrawPen, canvasPt.X - markerRadius, canvasPt.Y - markerRadius, markerRadius * 2, markerRadius * 2);
-                    if (actor.OverlaySettings.IsHighlighted)
+                    if (actor.OverlaySettings.Mode == GameData.OverlaySettings.DisplayMode.AlwaysAndHighlight || actor.OverlaySettings.IsHighlighted)
                     {
                         float highlightRadius = markerRadius + (highlightAnimAlpha * 50.0f);
                         using (Pen highlightPen = new Pen(Color.FromArgb((int)(255 * (1.0f - highlightAnimAlpha)), actor.OverlaySettings.DrawPen.Color)))
