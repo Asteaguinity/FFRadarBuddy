@@ -51,9 +51,9 @@
             ]
         }, {
             "id": "camera",
-            "type": "fixed",
-            "fixed": "1e72880",
-            "offsets": [0],
+            "type": "sig",
+            "sig": "48833d????????007411488b0d????????4885c97405e8????????488d0d",
+            "offsets": [0, 0],
             "fields": [{
                     "id": "size",
                     "v": 464
@@ -73,8 +73,8 @@
             ]
         }, {
             "id": "conditions",
-            "type": "fixed",
-            "fixed": "0x1ebd030",
+            "type": "sig",
+            "sig": "83????753544????c7442420000000008b93e002000041b803000000b9c7020000e8????????41b001488d0d",
             "offsets": [],
             "fields": [{
                     "id": "size",
