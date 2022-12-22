@@ -92,7 +92,16 @@ namespace FFRadarBuddy
             if (!memoryScanner.IsValid())
             {
                 ScannerState newState = ScannerState.Ready;
-                memoryScanner.OpenProcess("ffxiv_dx11");
+                // try catch is necessary, as exceptions can happen during FFXIV shutdown
+                try
+                {
+                    memoryScanner.OpenProcess("ffxiv_dx11");
+                }
+                catch (Exception e)
+                {
+                    Logger.WriteLine("Error while trying to open process!\n" + e.ToString());
+                    newState = ScannerState.MissingProcess;
+                }
 
                 if (memoryScanner.IsValid())
                 {
