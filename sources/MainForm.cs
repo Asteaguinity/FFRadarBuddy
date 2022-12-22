@@ -712,6 +712,7 @@ namespace FFRadarBuddy
             filterOb.Mode = GameData.OverlaySettings.DisplayMode.WhenClose;
             filterOb.MatchType = actor.Type;
             filterOb.MatchNpcId = actor.NpcId;
+            filterOb.UseMatchNpcDescription = false;
             filterOb.UseMatchType = true;
             filterOb.UseMatchNpcId = (actor.Type != MemoryLayout.ActorType.Player);
 
@@ -747,7 +748,7 @@ namespace FFRadarBuddy
         private void UpdateFilterItem(ListViewItem lvi)
         {
             ActorFilter filterOb = (ActorFilter)lvi.Tag;
-            lvi.SubItems[0].Text = filterOb.UseMatchNpcId ? filterOb.Description : "(multiple)";
+            lvi.SubItems[0].Text = (filterOb.UseMatchNpcId || filterOb.UseMatchNpcDescription) ? filterOb.Description : "(multiple)";
             lvi.SubItems[1].Text = filterOb.MatchType.ToString();
             lvi.SubItems[2].Text = filterOb.UseMatchNpcId ? "set" : "";
             // 3: color
@@ -838,6 +839,7 @@ namespace FFRadarBuddy
                 contextMenuStripFilters.Tag = filterTag;
 
                 toolStripMenuItemOverrideName.Checked = filterTag.HasDescriptionOverride;
+                toolStripMenuItemMatchName.Checked = filterTag.UseMatchNpcDescription;
                 toolStripMenuItemMatchType.Checked = filterTag.UseMatchType;
                 toolStripMenuItemMatchId.Checked = filterTag.UseMatchNpcId;
                 toolStripTextBoxNameOverrride.Text = string.IsNullOrEmpty(filterTag.Description) ? "??" : filterTag.Description;
@@ -869,6 +871,7 @@ namespace FFRadarBuddy
                 {
                     filterTag.HasDescriptionOverride = toolStripMenuItemOverrideName.Checked;
                     filterTag.UseMatchType = toolStripMenuItemMatchType.Checked;
+                    filterTag.UseMatchNpcDescription = toolStripMenuItemMatchName.Checked;
                     filterTag.UseMatchNpcId = toolStripMenuItemMatchId.Checked;
                     filterTag.Description = toolStripTextBoxNameOverrride.Text;
                     uint.TryParse(toolStripTextBoxMatchId.Text, out filterTag.MatchNpcId);
@@ -910,6 +913,7 @@ namespace FFRadarBuddy
             filterOb.Mode = GameData.OverlaySettings.DisplayMode.WhenClose;
             filterOb.MatchType = MemoryLayout.ActorType.Player;
             filterOb.MatchNpcId = 0;
+            filterOb.UseMatchNpcDescription = false;
             filterOb.UseMatchType = true;
             filterOb.UseMatchNpcId = false;
 

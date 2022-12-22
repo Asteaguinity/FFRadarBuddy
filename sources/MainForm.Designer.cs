@@ -96,6 +96,7 @@
             this.timerScan = new System.Windows.Forms.Timer(this.components);
             this.labelUpdateNotify = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.toolStripMenuItemMatchName = new System.Windows.Forms.ToolStripMenuItem();
             this.panelScanState.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -235,7 +236,6 @@
             // 
             // toolStripPresetListTextBox
             // 
-            this.toolStripPresetListTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripPresetListTextBox.Name = "toolStripPresetListTextBox";
             this.toolStripPresetListTextBox.Size = new System.Drawing.Size(100, 23);
             this.toolStripPresetListTextBox.TextChanged += new System.EventHandler(this.toolStripPresetListTextBox_TextChanged);
@@ -382,6 +382,7 @@
             // 
             this.contextMenuStripFilters.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOverrideName,
+            this.toolStripMenuItemMatchName,
             this.toolStripTextBoxNameOverrride,
             this.toolStripSeparator2,
             this.toolStripMenuItemMatchType,
@@ -394,7 +395,7 @@
             this.toolStripComboBoxLabelMode,
             this.toolStripMenuItemAddFilter});
             this.contextMenuStripFilters.Name = "contextMenuStripFilters";
-            this.contextMenuStripFilters.Size = new System.Drawing.Size(264, 236);
+            this.contextMenuStripFilters.Size = new System.Drawing.Size(264, 280);
             this.contextMenuStripFilters.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuStripFilters_Closing);
             this.contextMenuStripFilters.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripFilters_Opening);
             this.contextMenuStripFilters.Opened += new System.EventHandler(this.contextMenuStripFilters_Opened);
@@ -408,7 +409,6 @@
             // 
             // toolStripTextBoxNameOverrride
             // 
-            this.toolStripTextBoxNameOverrride.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxNameOverrride.Name = "toolStripTextBoxNameOverrride";
             this.toolStripTextBoxNameOverrride.Size = new System.Drawing.Size(100, 23);
             // 
@@ -444,7 +444,6 @@
             // 
             // toolStripTextBoxMatchId
             // 
-            this.toolStripTextBoxMatchId.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxMatchId.Name = "toolStripTextBoxMatchId";
             this.toolStripTextBoxMatchId.Size = new System.Drawing.Size(100, 23);
             // 
@@ -763,6 +762,13 @@
             this.labelUpdateNotify.Visible = false;
             this.labelUpdateNotify.Click += new System.EventHandler(this.labelUpdateNotify_Click);
             // 
+            // toolStripMenuItemMatchName
+            // 
+            this.toolStripMenuItemMatchName.CheckOnClick = true;
+            this.toolStripMenuItemMatchName.Name = "toolStripMenuItemMatchName";
+            this.toolStripMenuItemMatchName.Size = new System.Drawing.Size(263, 22);
+            this.toolStripMenuItemMatchName.Text = "Match name (click to change)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -866,6 +872,7 @@
         private System.Windows.Forms.Label labelSelectedPos;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelSelectedFlagsHidden;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMatchName;
     }
 }
 

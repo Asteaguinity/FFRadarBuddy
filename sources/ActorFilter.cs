@@ -11,6 +11,7 @@ namespace FFRadarBuddy
     {
         public string Description;
         public bool HasDescriptionOverride;
+        public bool UseMatchNpcDescription;
         public Pen Pen;
         public GameData.OverlaySettings.DisplayMode Mode;
 
@@ -40,6 +41,11 @@ namespace FFRadarBuddy
                 hasMatch = false;
             }
 
+            if (UseMatchNpcDescription && actor.Name != Description)
+            {
+                hasMatch = false;
+            }
+            
             if (hasMatch)
             {
                 actor.OverlaySettings.Mode = Mode;
@@ -58,6 +64,7 @@ namespace FFRadarBuddy
             {
                 HasDescriptionOverride = (JsonParser.BoolValue)jsonOb["hasName"];
                 Description = jsonOb["name"];
+                UseMatchNpcDescription = (JsonParser.BoolValue)jsonOb["matchName", JsonParser.BoolValue.Empty];
 
                 string colorHex = "0x" + jsonOb["color"];
                 Color color = Color.FromArgb(Convert.ToInt32(colorHex, 16));
@@ -87,6 +94,7 @@ namespace FFRadarBuddy
 
             writer.WriteBool(HasDescriptionOverride, "hasName");
             writer.WriteString(Description, "name");
+            writer.WriteBool(UseMatchNpcDescription, "matchName");
 
             string colorHex = Pen.Color.ToArgb().ToString("x8");
             writer.WriteString(colorHex, "color");
