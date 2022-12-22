@@ -30,6 +30,7 @@ namespace FFRadarBuddy
 
         private float maxProjectedDistFromCenterSq = 0.25f;
         private float maxDistanceFromCamera = 100.0f;
+        private bool hideDuringCutscenes;
         private bool showDistanceInOverlay;
 
         public OverlayForm()
@@ -42,6 +43,7 @@ namespace FFRadarBuddy
             PlayerSettings settings = PlayerSettings.Get();
             maxProjectedDistFromCenterSq = settings.MaxDistanceFromCenter * settings.MaxDistanceFromCenter;
             maxDistanceFromCamera = settings.MaxDistanceFromCamera;
+            hideDuringCutscenes = settings.HideDuringCutscenes;
             showDistanceInOverlay = settings.ShowDistanceInOverlay;
 
             labelFont = new Font(FontFamily.GenericSansSerif, settings.FontSize);
@@ -99,6 +101,17 @@ namespace FFRadarBuddy
 
                 viewTM = Matrix4x4.CreateLookAt(gameData.camera.Position, gameData.camera.Target, cameraUp);
                 gameToScreenTM = viewTM * projectionTM;
+            }
+            if (gameData.UpdateConditionFlags())
+            {
+                if (hideDuringCutscenes && gameData.conditionFlags.OccupiedInCutSceneEvent)
+                {
+                    this.Hide();
+                }
+                else
+                {
+                    this.Show();
+                }
             }
 
             highlightAnimAlpha = (highlightAnimAlpha >= 1.0f) ? 0.0f : (highlightAnimAlpha + 0.05f);

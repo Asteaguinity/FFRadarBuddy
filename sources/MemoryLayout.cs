@@ -14,6 +14,7 @@ namespace FFRadarBuddy
         public static MemoryPath memPathActors = new MemoryPathSignature("488b420848c1e8033da701000077??8bc0488d0d", 0);
         public static MemoryPath memPathTarget = new MemoryPathSignature("5fc3483935????????75??483935", -16);
         public static MemoryPath memPathCamera = new MemoryPath(0x1e76900, 0);
+        public static MemoryPath memPathConditionFlag = new MemoryPath(0x1ec10b0);
 
         public class ActorConsts
         {
@@ -43,6 +44,12 @@ namespace FFRadarBuddy
             public static int Target = 0x1c0;         // 3x float
             public static int Distance = 0x114;      // float
             public static int Fov = 0x120;           // float
+        }
+
+        public class ConditionFlagConsts
+        {
+            public static int Size = 95; // at least
+            public static int OccupiedInCutSceneEvent = 35;
         }
 
         public enum ActorType : byte
@@ -191,6 +198,41 @@ namespace FFRadarBuddy
                 Target.X = BitConverter.ToSingle(bytes, CameraConsts.Target);
                 Target.Y = BitConverter.ToSingle(bytes, CameraConsts.Target + 4);
                 Target.Z = BitConverter.ToSingle(bytes, CameraConsts.Target + 8);
+            }
+        }
+
+        public class ConditionFlagData
+        {
+            public byte[] ConditionFlags;
+            public bool OccupiedInCutSceneEvent;
+
+            public ConditionFlagData() { }
+            public ConditionFlagData(byte[] bytes) { Set(bytes); }
+
+            public bool Set(byte[] bytes)
+            {
+                if (!ByteArrayCompare(ConditionFlags, bytes))
+                {
+                    ConditionFlags = bytes;
+                    OccupiedInCutSceneEvent = BitConverter.ToBoolean(bytes, ConditionFlagConsts.OccupiedInCutSceneEvent);
+                    return true;
+                }
+                return false;
+            }
+
+            static bool ByteArrayCompare(byte[] a1, byte[] a2)
+            {
+                if ((a1 == null) != (a2 == null))
+                    return false;
+
+                if (a1.Length != a2.Length)
+                    return false;
+
+                for (int i = 0; i < a1.Length; i++)
+                    if (a1[i] != a2[i])
+                        return false;
+
+                return true;
             }
         }
     }

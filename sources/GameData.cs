@@ -67,6 +67,7 @@ namespace FFRadarBuddy
 
         public List<ActorItem> listActors = new List<ActorItem>();
         public MemoryLayout.CameraData camera = new MemoryLayout.CameraData();
+        public MemoryLayout.ConditionFlagData conditionFlags = new MemoryLayout.ConditionFlagData();
 
         public delegate void ActorListChanged();
         public event ActorListChanged OnActorListChanged;
@@ -112,6 +113,12 @@ namespace FFRadarBuddy
                     if (!MemoryLayout.memPathActors.Resolve(memoryScanner))
                     {
                         Logger.WriteLine("Failed to resolve mem path: ActorList");
+                        newState = ScannerState.MissingMemPaths;
+                    }
+
+                    if (!MemoryLayout.memPathConditionFlag.Resolve(memoryScanner))
+                    {
+                        Logger.WriteLine("Failed to resolve mem path: ConditionFlag");
                         newState = ScannerState.MissingMemPaths;
                     }
                 }
@@ -220,6 +227,24 @@ namespace FFRadarBuddy
             }
             catch (Exception) { }
 
+            return false;
+        }
+
+        public bool UpdateConditionFlags()
+        {
+            try
+            {
+                if (memoryScanner.IsValid())
+                {
+                    long conditionFlagAddr = MemoryLayout.memPathConditionFlag.GetResolvedAddress();
+                    byte[] conditionFlagData = memoryScanner.ReadBytes(conditionFlagAddr, MemoryLayout.ConditionFlagConsts.Size);
+                    if (conditionFlagData != null)
+                    {
+                        return conditionFlags.Set(conditionFlagData);
+                    }
+                }
+            }
+            catch (Exception) { }
             return false;
         }
     }
