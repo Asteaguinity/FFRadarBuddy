@@ -86,10 +86,10 @@ namespace FFRadarBuddy
 
         private void UpdateScanner()
         {
-            ScannerState newState = ScannerState.Ready;
 
             if (!memoryScanner.IsValid())
             {
+                ScannerState newState = ScannerState.Ready;
                 memoryScanner.OpenProcess("ffxiv_dx11");
 
                 if (memoryScanner.IsValid())
@@ -118,12 +118,12 @@ namespace FFRadarBuddy
                 {
                     newState = ScannerState.MissingProcess;
                 }
-            }
 
-            if (newState != scannerState)
-            {
-                scannerState = newState;
-                OnScannerStateChanged?.Invoke(newState);
+                if (newState != scannerState)
+                {
+                    scannerState = newState;
+                    OnScannerStateChanged?.Invoke(newState);
+                }
             }
         }
 
